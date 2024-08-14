@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const apellidosAlemanes = [
+  "Müller", "Schmidt", "Schneider", "Fischer", "Weber", "Meyer", "Wagner", "Becker", "Schulz", "Hoffmann",
+  "Schäfer", "Koch", "Bauer", "Richter", "Klein", "Wolf", "Schröder", "Neumann", "Schwarz", "Zimmermann",
+  "Braun", "Krüger", "Hofmann", "Hartmann", "Lange", "Schmitt", "Werner", "Krause", "Meier", "Lehmann",
+  "Schmid", "Schulze", "Maier", "Köhler", "Herrmann", "König", "Walter", "Mayer", "Huber", "Kaiser",
+  "Fuchs", "Peters", "Lang", "Scholz", "Möller", "Weiß", "Jung", "Hahn", "Schubert", "Vogel",
+  "Friedrich", "Keller", "Günther", "Frank", "Berger", "Winkler", "Roth", "Beck", "Lorenz", "Baumann",
+  "Fröhlich", "Böhm", "Schulte", "Graf", "Stein", "Jäger", "Seidel", "Pfeiffer", "Ludwig", "Kuhn",
+  "Pohl", "Ziegler", "Martin", "Vogel", "Arnold", "Engel", "Böhler", "Fritsch", "Otto", "Schilling",
+  "Jakob", "Kraft", "Ackermann", "Busch", "Buschmann", "Albrecht", "Barth", "Dreyer", "Bender", "Eichhorn",
+  "Ebert", "Riedel", "Knoll", "Kremer", "Engelhardt", "Kühn", "Urban", "Dietz", "Schütz", "Heilmann"
+];
+
+const apellidosEspanoles = [
+  "García", "Fernández", "González", "Rodríguez", "López", "Martínez", "Sánchez", "Pérez", "Gómez", "Martín",
+  "Jiménez", "Ruiz", "Hernández", "Díaz", "Moreno", "Muñoz", "Álvarez", "Romero", "Alonso", "Gutiérrez",
+  "Navarro", "Torres", "Domínguez", "Vázquez", "Ramos", "Gil", "Ramírez", "Serrano", "Blanco", "Molina",
+  "Morales", "Suárez", "Ortega", "Delgado", "Castro", "Ortiz", "Rubio", "Marín", "Sanz", "Iglesias",
+  "Nuñez", "Medina", "Garrido", "Santos", "Castillo", "Cortés", "Lozano", "Guerrero", "Cano", "Prieto",
+  "Méndez", "Calvo", "Cruz", "Gallego", "Vidal", "León", "Herrera", "Marquez", "Peña", "Flores",
+  "Cabrera", "Campos", "Vega", "Fuentes", "Carrasco", "Diez", "Caballero", "Reyes", "Nieto", "Aguilar",
+  "Pascual", "Santana", "Herrero", "Lorenzo", "Montero", "Hidalgo", "Giménez", "Ibáñez", "Ferrer", "Durán",
+  "Santiago", "Benítez", "Ferrer", "Arias", "Mora", "Vicente", "Vargas", "Carmona", "Crespo", "Román",
+  "Pastor", "Soto", "Saez", "Velasco", "Moya", "Soler", "Parra", "Esteban", "Bravo", "Gallardo"
+];
+
+const nombresCompuestos = [
+  "Juan Carlos", "María José", "José Luis", "Ana María", "Luis Miguel", "María del Carmen", "Carlos Alberto", "María Teresa", "José Antonio", "María Isabel",
+  "Juan Manuel", "María Elena", "Francisco Javier", "María Dolores", "Jesús María", "María Lourdes", "Juan José", "María Fernanda", "José Manuel", "María Eugenia",
+  "Miguel Ángel", "María Victoria", "Pedro Antonio", "María Antonia", "Juan Francisco", "María Soledad", "Antonio José", "María Cristina", "José María", "María Mercedes",
+  "Ángel Luis", "María del Rosario", "Juan Antonio", "María Concepción", "Manuel Alejandro", "María Esperanza", "Rafael Ángel", "María Consuelo", "Luis Fernando", "María de los Ángeles",
+  "Juan Ramón", "María del Pilar", "Pablo Andrés", "María de la Luz", "Carlos Enrique", "María de la Paz", "José Francisco", "María de Jesús", "Pedro Luis", "María de Lourdes",
+  "Francisco José", "María Estrella", "Ricardo Andrés", "María Auxiliadora", "José Carlos", "María Amparo", "Miguel Francisco", "María Dolores", "Juan Andrés", "María Isabel",
+  "José Alberto", "María Clara", "Jesús Antonio", "María Gracia", "José Luis", "María Teresa", "Juan Miguel", "María del Mar", "Pedro Jesús", "María Belén",
+  "Carlos Eduardo", "María Guadalupe", "José David", "María de la Cruz", "Luis Eduardo", "María del Rocío", "Juan David", "María Lucía", "Francisco Javier", "María Teresa",
+  "Carlos Francisco", "María José", "Miguel Ángel", "María del Carmen", "José Ricardo", "María del Rosario", "Luis Antonio", "María Lourdes", "Juan Pablo", "María de los Remedios",
+  "José Antonio", "María Asunción", "Juan Luis", "María del Pilar", "Carlos Alberto", "María de Fátima", "Miguel Eduardo", "María del Consuelo", "Pedro Francisco", "María de las Mercedes"
+];
+
+
+        function generar(){
+            var salida = "USE sistema_escolar; <br>INSERT INTO alumnos(matricula, ApellidoPaterno, ApellidoMaterno, nombres, correo) VALUES ";
+            for (let index = 1; index < 20000; index++) {
+                salida += `(211${String(index).padStart(5, "0")}, ' 
+                ${apellidosAlemanes[Math.floor(Math.random() * 100)]}', '
+                ${apellidosEspanoles[Math.floor(Math.random() * 100)]}', '
+                ${nombresCompuestos[Math.floor(Math.random() * 100)]}', 
+                '211${String(index).padStart(5, "0")}@uthermosillo.edu.mx'), <br>`;
+            }
+            salida = `${salida.slice(0,-6)};`;
+            document.getElementById("resultado").innerHTML=salida;
+        }
+
+        function descargar(){
+            var descarga = document.createElement("a");
+            descarga.setAttribute("href", "data:text/plain;charset=UTF-8,"+encodeURIComponent("probando"));
+            descarga.setAttribute("download", "alumnos.sql");
+            descarga.style.display="none";
+            document.body.appendChild(descarga);
+            descarga.click();
+            document.body.removeChild(descarga);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="generar" onclick="GenerarAlumnos()">
+    <input type="button" value="descargar" onclick="descargar()">
+    <p id="resultado"></p>
+</body>
+</html>
